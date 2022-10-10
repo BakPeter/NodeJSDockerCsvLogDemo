@@ -1,0 +1,10 @@
+{
+  "applicationName": "JsLogsDockerDemo",
+  "logInterval": 1,
+  "loggerSettings": {
+    "serviceName": "JsLogsDockerDemoService",
+    "fileName": "JsLogsDockerDemo",
+    "serverUrl": "http://seqService:5341",
+    "enableLogger": true
+  }
+}

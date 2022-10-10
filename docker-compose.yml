@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  seqService:
+    image: datalust/seq:latest
+    container_name: seqLoggerService
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 8080:80
+      - 5341:5341
+    volumes:
+      - C:\Docker\Data\JsLogsDockerDemo\Seq:/data/
+    networks:
+      - main
+
+  JsLogsDockerDemoApp:
+    image: jslogsdockerdemo:1.0.0
+    container_name: JsDockerDemoApp
+    depends_on:
+      - seqService
+    environment:
+      - enableLogger=true
+      - serverUrl=http://seqService:5341
+      - datePattern=YYYY-MM-DD
+      - zippedArchive=true
+      - maxSize=150m
+      - maxFiles=20
+      - extension=.csv
+    volumes:
+      - C:\Docker\Data\JsLogsDockerDemo\Logs:/usr/src/app/logs
+    networks:
+      - main
+
+networks:
+  main:
+    name: services-main-network
